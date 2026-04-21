@@ -94,6 +94,12 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
             let report = mokabench::run_multi_threads_stretto(config, capacity, *num_clients)?;
             println!("{}", report.to_csv_record());
         }
+
+        for num_clients in num_clients_slice {
+            let report =
+                mokabench::run_multi_tasks_stretto_async(config, capacity, *num_clients).await?;
+            println!("{}", report.to_csv_record());
+        }
     }
 
     #[cfg(feature = "tiny-ufo")]
