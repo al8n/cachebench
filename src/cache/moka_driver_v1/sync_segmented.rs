@@ -102,8 +102,8 @@ impl<I> MokaSegmentedCache<I> {
 
             #[cfg(not(any(feature = "moka-v08", feature = "moka-v09", feature = "moka-v010")))]
             {
-                use crate::cache::moka_driver::expiry::MokabenchExpiry;
-                let expiry = MokabenchExpiry::new(config.ttl, config.tti);
+                use crate::cache::moka_driver::expiry::CachebenchExpiry;
+                let expiry = CachebenchExpiry::new(config.ttl, config.tti);
                 builder = builder.expire_after(expiry);
             }
         }

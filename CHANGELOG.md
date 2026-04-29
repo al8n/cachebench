@@ -1,4 +1,13 @@
-# Mokabench &mdash; Change Log
+# Cachebench &mdash; Change Log
+
+## Version 0.11.0
+
+### Changed
+
+- **Renamed project from `mokabench` to `cachebench`.** The package, binary,
+  and library import paths are now `cachebench`. The internal `MokabenchExpiry`
+  helper is now `CachebenchExpiry`. Functionality is unchanged. Upstream:
+  [moka-rs/mokabench](https://github.com/moka-rs/mokabench).
 
 ## Version 0.10.0
 

@@ -394,6 +394,34 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773d90827bc3feecfb67fab12e24de0749aad83c74b9504ecde46237b5cd24e2"
 
 [[package]]
+name = "cachebench"
+version = "0.11.0"
+dependencies = [
+ "TinyUFO",
+ "anyhow",
+ "async-io 1.13.0",
+ "async-std",
+ "async-trait",
+ "clap",
+ "crossbeam-channel",
+ "futures-util",
+ "hashlink",
+ "itertools",
+ "mini-moka",
+ "moka 0.10.4",
+ "moka 0.11.3",
+ "moka 0.12.8",
+ "moka 0.8.6",
+ "moka 0.9.9",
+ "parking_lot",
+ "quick_cache",
+ "stretto",
+ "thiserror 2.0.18",
+ "tokio",
+ "xxhash-rust",
+]
+
+[[package]]
 name = "camino"
 version = "1.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1291,34 +1319,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "mokabench"
-version = "0.10.0"
-dependencies = [
- "TinyUFO",
- "anyhow",
- "async-io 1.13.0",
- "async-std",
- "async-trait",
- "clap",
- "crossbeam-channel",
- "futures-util",
- "hashlink",
- "itertools",
- "mini-moka",
- "moka 0.10.4",
- "moka 0.11.3",
- "moka 0.12.8",
- "moka 0.8.6",
- "moka 0.9.9",
- "parking_lot",
- "quick_cache",
- "stretto",
- "thiserror 2.0.18",
- "tokio",
- "xxhash-rust",
-]
-
-[[package]]
 name = "num_cpus"
 version = "1.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1855,6 +1855,8 @@ dependencies = [
  "async-channel 2.3.1",
  "atomic",
  "crossbeam-channel",
+ "crossbeam-utils 0.8.20",
+ "event-listener 5.3.1",
  "futures",
  "getrandom 0.4.2",
  "parking_lot",

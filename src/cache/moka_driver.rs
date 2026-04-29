@@ -76,25 +76,25 @@ struct InitClosureError1;
 struct InitClosureError2;
 
 #[cfg(not(any(feature = "moka-v08", feature = "moka-v09", feature = "moka-v010")))]
-/// The `expiry` module provides `MokabenchExpiry`, our implementation of
+/// The `expiry` module provides `CachebenchExpiry`, our implementation of
 /// `moka::Expiry` trait, to support per-entry expiration.
 pub(crate) mod expiry {
     use std::time::{Duration, Instant};
 
     /// Implements `moka::Expiry` trait to support per-entry expiration. Our
     /// implementation simply emulates the cache level TTL and TTI.
-    pub(crate) struct MokabenchExpiry {
+    pub(crate) struct CachebenchExpiry {
         ttl: Option<Duration>,
         tti: Option<Duration>,
     }
 
-    impl MokabenchExpiry {
+    impl CachebenchExpiry {
         pub(crate) fn new(ttl: Option<Duration>, tti: Option<Duration>) -> Self {
             Self { ttl, tti }
         }
     }
 
-    impl<K, V> crate::moka::Expiry<K, V> for MokabenchExpiry {
+    impl<K, V> crate::moka::Expiry<K, V> for CachebenchExpiry {
         fn expire_after_create(
             &self,
             _key: &K,

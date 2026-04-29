@@ -85,8 +85,8 @@ impl<I> MokaAsyncCache<I> {
             .initial_capacity(init_cap);
 
         if config.per_key_expiration {
-            use crate::cache::moka_driver::expiry::MokabenchExpiry;
-            let expiry = MokabenchExpiry::new(config.ttl, config.tti);
+            use crate::cache::moka_driver::expiry::CachebenchExpiry;
+            let expiry = CachebenchExpiry::new(config.ttl, config.tti);
             builder = builder.expire_after(expiry);
         }
 

@@ -1,6 +1,10 @@
+.vscode/
 .DS_Store
 *.lis
 **/*.rs.bk
 **/*~
 /scripts/
 /target/
+
+**.claude/
+

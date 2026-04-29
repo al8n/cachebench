@@ -6,7 +6,6 @@ use super::{AsyncCacheDriver, Counters, DefaultHasher, Key, Value};
 use crate::{config::Config, parser::TraceEntry, report::Report, EvictionCounters};
 use stretto::TokioRuntime;
 
-
 #[derive(Clone)]
 pub struct StrettoAsyncCache {
     config: Arc<Config>,

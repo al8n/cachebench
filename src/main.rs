@@ -1,5 +1,5 @@
 use anyhow::Context;
-use mokabench::{
+use cachebench::{
     self,
     config::{Config, RemovalNotificationMode},
     Report, TraceFile,
@@ -56,7 +56,7 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
 
     #[cfg(any(feature = "mini-moka", feature = "moka-v08", feature = "moka-v09"))]
     if !config.insert_once && !config.is_eviction_listener_enabled() {
-        let report = mokabench::run_single(config, capacity)?;
+        let report = cachebench::run_single(config, capacity)?;
         println!("{}", report.to_csv_record());
     }
 
@@ -67,7 +67,7 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
         && !config.is_eviction_listener_enabled()
     {
         for num_clients in num_clients_slice {
-            let report = mokabench::run_multi_threads_hashlink(config, capacity, *num_clients)?;
+            let report = cachebench::run_multi_threads_hashlink(config, capacity, *num_clients)?;
             println!("{}", report.to_csv_record());
         }
     }
@@ -79,7 +79,7 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
         && !config.is_eviction_listener_enabled()
     {
         for num_clients in num_clients_slice {
-            let report = mokabench::run_multi_threads_quick_cache(config, capacity, *num_clients)?;
+            let report = cachebench::run_multi_threads_quick_cache(config, capacity, *num_clients)?;
             println!("{}", report.to_csv_record());
         }
     }
@@ -91,13 +91,13 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
         && !config.is_eviction_listener_enabled()
     {
         for num_clients in num_clients_slice {
-            let report = mokabench::run_multi_threads_stretto(config, capacity, *num_clients)?;
+            let report = cachebench::run_multi_threads_stretto(config, capacity, *num_clients)?;
             println!("{}", report.to_csv_record());
         }
 
         for num_clients in num_clients_slice {
             let report =
-                mokabench::run_multi_tasks_stretto_async(config, capacity, *num_clients).await?;
+                cachebench::run_multi_tasks_stretto_async(config, capacity, *num_clients).await?;
             println!("{}", report.to_csv_record());
         }
     }
@@ -109,7 +109,7 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
         && !config.is_eviction_listener_enabled()
     {
         for num_clients in num_clients_slice {
-            let report = mokabench::run_multi_threads_tiny_ufo(config, capacity, *num_clients)?;
+            let report = cachebench::run_multi_threads_tiny_ufo(config, capacity, *num_clients)?;
             println!("{}", report.to_csv_record());
         }
     }
@@ -120,25 +120,25 @@ async fn run_with_capacity(config: &Config, capacity: usize) -> anyhow::Result<(
         && !config.is_eviction_listener_enabled()
     {
         for num_clients in num_clients_slice {
-            let report = mokabench::run_multi_threads_moka_dash(config, capacity, *num_clients)?;
+            let report = cachebench::run_multi_threads_moka_dash(config, capacity, *num_clients)?;
             println!("{}", report.to_csv_record());
         }
     }
 
     for num_clients in num_clients_slice {
-        let report = mokabench::run_multi_threads_moka_sync(config, capacity, *num_clients)?;
+        let report = cachebench::run_multi_threads_moka_sync(config, capacity, *num_clients)?;
         println!("{}", report.to_csv_record());
     }
 
     for num_clients in num_clients_slice {
-        let report = mokabench::run_multi_tasks_moka_async(config, capacity, *num_clients).await?;
+        let report = cachebench::run_multi_tasks_moka_async(config, capacity, *num_clients).await?;
         println!("{}", report.to_csv_record());
     }
 
     let num_segments = 8;
 
     for num_clients in num_clients_slice {
-        let report = mokabench::run_multi_threads_moka_segment(
+        let report = cachebench::run_multi_threads_moka_segment(
             config,
             capacity,
             *num_clients,
@@ -174,7 +174,7 @@ const OPTION_ENTRY_API: &str = "entry-api";
 const OPTION_PER_KEY_EXPIRATION: &str = "per-key-expiration";
 
 fn create_config() -> anyhow::Result<(Vec<TraceFile>, Config)> {
-    let mut app = Command::new("Moka Bench")
+    let mut app = Command::new("Cachebench")
         .arg(
             Arg::new(OPTION_TRACE_FILE)
                 .alias(OPTION_TRACE_FILES)

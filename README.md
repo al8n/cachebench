@@ -1,6 +1,8 @@
-# Mokabench
+# Cachebench
 
-A load generator for some of the concurrent cache libraries for Rust.
+A load generator for some of the concurrent cache libraries for Rust. Forked
+from [`moka-rs/mokabench`](https://github.com/moka-rs/mokabench) and extended
+to cover newer cache implementations.
 
 
 ## Usage
@@ -14,8 +16,8 @@ Install a recent stable [Rust toolchain][rustup].
 Clone this repository:
 
 ```console
-$ git clone https://github.com/moka-rs/mokabench.git
-$ cd mokabench
+$ git clone https://github.com/al8n/cachebench.git
+$ cd cachebench
 ```
 
 Then clone the submodule [`cache-trace`][git-cache-trace], which contains the trace
@@ -60,16 +62,12 @@ or on macOS using Homebrew:
 $ brew install zstd
 ```
 
-In the future, you will not need to expand the trace files manually. Mokabench will
-add support for directly reading the compressed trace files. ([#13])
-
 [git-cache-trace]: https://github.com/moka-rs/cache-trace
 [git-cache-trace-arc]: https://github.com/moka-rs/cache-trace/tree/main/arc
 [zstd]: https://facebook.github.io/zstd/
-[#13]: https://github.com/moka-rs/mokabench/issues/13
 [^1]: "ARC: A Self-Tuning, Low Overhead Replacement Cache" by Nimrod Megiddo and Dharmendra S. Modha.
 
-### Build Mokabench
+### Build Cachebench
 
 To build with the default features, run the following command. This will enables the
 latest version of Moka.
@@ -131,10 +129,10 @@ Here are some examples to run benchmarks:
 ```console
 ## Run with the default (S3.lis) dataset, using single client thread,
 ## and then 3 client threads, and so on.
-$ ./target/release/mokabench --num-clients 1,3,6
+$ ./target/release/cachebench --num-clients 1,3,6
 
 ## Run with DS1.lis dataset.
-$ ./target/release/mokabench --num-clients 1,3,6 --trace-file ds1
+$ ./target/release/cachebench --num-clients 1,3,6 --trace-file ds1
 
 ## Run with an insertion delay (in microseconds) to simulate more
 ## realistic workload. The following example will try to add ~1
@@ -144,7 +142,7 @@ $ ./target/release/mokabench --num-clients 1,3,6 --trace-file ds1
 ## have a minimum sleep resolution larger than 1 microsecond. So
 ## the actual delay may be larger than the specified value.
 ##
-$ ./target/release/mokabench --num-clients 1,3,6 --insertion-delay 1
+$ ./target/release/cachebench --num-clients 1,3,6 --insertion-delay 1
 ```
 
 You can also test Moka's advanced features/APIs:
@@ -152,22 +150,22 @@ You can also test Moka's advanced features/APIs:
 ```console
 ## Call `get` and `insert` with time-to-live = 3 seconds and
 ## time-to-idle = 1 second.
-$ ./target/release/mokabench --ttl 3 --tti 1
+$ ./target/release/cachebench --ttl 3 --tti 1
 
 ## Also call `get_or_insert_with`.
-$ ./target/release/mokabench --ttl 3 --tti 1 --insert-once
+$ ./target/release/cachebench --ttl 3 --tti 1 --insert-once
 
 ## Call `get`, `insert` and `invalidate`.
-$ ./target/release/mokabench --invalidate
+$ ./target/release/cachebench --invalidate
 
 ## Call `get`, `insert` and `invalidate_all`.
-$ ./target/release/mokabench --invalidate-all
+$ ./target/release/cachebench --invalidate-all
 
 ## Call `get`, `insert` and `invalidate_entries-if`.
-$ ./target/release/mokabench --invalidate-entries-if
+$ ./target/release/cachebench --invalidate-entries-if
 
 ## Run with everything.
-$ ./target/release/mokabench --ttl 3 --tti 1 \
+$ ./target/release/cachebench --ttl 3 --tti 1 \
     --insert-once --invalidate \
     --invalidate-all --invalidate-entries-if
 ```
@@ -175,7 +173,7 @@ $ ./target/release/mokabench --ttl 3 --tti 1 \
 
 ## License
 
-Mokabench is distributed under the MIT license. See [LICENSE-MIT](LICENSE-MIT) for details.
+Cachebench is distributed under the MIT license. See [LICENSE-MIT](LICENSE-MIT) for details.
 
 <!-- Links -->
 
